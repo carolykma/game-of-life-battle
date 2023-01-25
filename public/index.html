@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <div id="container" class="hide d-flex justify-content-center">
+        <div id="canvas"></div>
+        <div id="menu" class="row justify-content-around">
+            <a href="game.html" class="box col-10 col-sm-auto p-3">
+                <div class="title">GAME OF LIFE</div>
+            </a>
+            <a href="https://www.linkedin.com/in/carolykma/" target="_blank" class="box col-10 col-sm-auto p-3">
+                <div class="title">ABOUT CAROL</div>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+
+    <script src="src/game/BaseGame.js"></script>
+    <script src="src/game/BattleModeGame.js"></script>
+    <script src="src/game/ColorModeGame.js"></script>
+
+    <script src="src/patterns.js"></script>
+    <script src="src/settings-display.js"></script>
+    <script src="src/settings-game.js"></script>
+    <script src="src/index.js"></script>
+
+    <script>
+        fullPage = true;
+        const horizontalTitle = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 1, 0, 1], [0, 0, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 1, 0, 0], [1, 1, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [0, 1, 0, 0, 0], [1, 1, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 1, 0, 1], [1, 0, 1, 0, 1], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 1, 0, 0], [1, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [0, 0, 0, 0, 1], [0, 0, 0, 0, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 1, 0, 0], [1, 0, 1, 0, 0], [0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [1, 0, 1, 0, 1], [1, 0, 1, 0, 1],];
+        const verticalTitle = [[1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1], [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],];
+
+        const setupInterval = setInterval(() => {
+            if (!setupFinished) return; // wait for p5 setup
+            clearInterval(setupInterval);
+
+            // setup
+            unitLength = 18;
+            windowResized();
+            clearBoard();
+
+            // draw static title
+            if (windowWidth > 830) applyOnPattern(horizontalTitle, 1, 1);
+            else applyOnPattern(verticalTitle, 1, 1);
+            toggleStart(false);
+
+            // show page
+            document.getElementById("container").classList.remove("hide");
+        }, 100);
+
+        setTimeout(() => {
+            toggleStart();
+        }, 3000);
+
+        setTimeout(() => {
+            clearBoard();
+            applyOnPattern(allPatterns.PentaDecathlon, Math.floor(columns / 2) - 8, Math.floor(rows * 3 / 5) - 2)
+        }, 7000);
+
+        setTimeout(() => {
+            clearBoard();
+            applyOnPattern(allPatterns.Sq3x3, Math.floor(columns / 2) - 1, Math.floor(rows * 3 / 5) - 2)
+        }, 11000);
+
+        setTimeout(() => {
+            clearBoard();
+            applyOnPattern(allPatterns.Pulsar, Math.floor(columns / 2) - 7, Math.floor(rows * 3 / 5) - 6)
+        }, 15000);
+    </script>
+</body>
+
+</html>

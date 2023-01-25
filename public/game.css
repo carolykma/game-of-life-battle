@@ -1,0 +1,128 @@
+:root {
+    --player1-color: rgb(160, 80, 255);
+    --player2-color: rgb(125, 245, 105);
+    --bs-primary: green;
+}
+
+html {
+    /* avoid screen flickering caused by score box */
+    overflow-y: scroll; 
+}
+
+#controls {
+    margin-right: 30px;
+}
+
+/* Button Styles */
+.btn {
+    font-family: Electrolize;
+    font-size: 16px !important;
+    margin: 2px;
+}
+
+.btn-secondary.selected {
+    box-shadow: 0 0 0 0.2rem rgb(0 255 255 / 50%) !important;
+}
+.btn-tertiary.selected {
+    background-color: #0AA;
+}
+
+.btn:active {
+    box-shadow: none;
+}
+.btn:focus {
+    box-shadow: none;
+}
+.btn-primary:active, btn-primary:focus {
+    box-shadow: none !important;
+}
+
+.tab-middle {
+    border-radius: 0;
+    margin: 0 !important;
+}
+.tab-left {
+    border-radius: 5px 0 0 5px;
+    margin: 4px 0px !important;
+}
+.tab-right {
+    border-radius: 0 5px 5px 0;
+    margin: 0 10px 0 0 !important;
+}
+
+#start-btn {
+    background-color: #28a745;
+    border-color: #28a745;
+    width: 4em;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+#start-btn.running {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+#toggle-battle {
+    background: rgb(135,68,105);
+    background: linear-gradient(38deg, rgba(135,68,105,1) 0%, rgba(35,130,144,1) 50%, rgba(117,93,55,1) 100%);
+    border: none;
+    margin: 4px 0px !important;
+}
+
+
+
+
+/* Score Board */
+#score-board {
+    width: 20%;
+    min-width: 170px;
+    position: fixed;
+    top: 20px;
+    left: calc((100vw - 30px)/2);
+    transform: translateX(-50%);
+}
+
+#vs {
+    font-size: 25px;
+    border-radius: 100%;
+}
+.score {
+    min-width: 3em;
+}
+#score-player2 {
+    text-align: right;
+}
+
+.bar-container {
+    background-color: #DDDDDD;
+    height: 12px;
+    border-radius: 2px;
+    padding: 2px;
+    box-shadow: black 0 0 5px;
+}
+
+.bar {
+    height: 8px;
+    position: relative;
+}
+
+#bar-player1 {
+    background-color: var(--player1-color);
+    width: 50%;
+}
+
+#bar-player2 {
+    background-color: var(--player2-color);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #toggle-battle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+    }
+
+    #score-board {
+        left: 105px;
+    }
+}

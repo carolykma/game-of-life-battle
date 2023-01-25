@@ -1,0 +1,63 @@
+:root {
+    --primary-color: #222222;
+    --secondary-color: #DDDDDD;
+}
+
+body {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-family: Electrolize;
+    font-size: 16px;
+}
+
+.hide {
+    display: none !important;
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #DDDDDD !important;
+    opacity: 80%;
+    border-radius: 10px;
+    border: 3px white solid;
+
+    font-family: Electrolize;
+    font-size: 16px;
+    line-height: 1.2em;
+    text-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px black;
+    transition: all 0.5s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+#home-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;    
+
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding-top: 8px;
+    
+    font-size: 25px;
+    line-height: 50px;
+    text-align: center; 
+}
+
+@media (min-width: 768px) {
+    .box {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .box {
+        margin-bottom: 20px;
+    }
+}

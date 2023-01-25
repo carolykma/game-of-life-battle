@@ -1,0 +1,149 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="game.css" />
+</head>
+
+<body>
+
+    <div id="canvas"></div>
+
+    <!-- All Controls -->
+    <div class="row pt-2" id="controls">
+
+        <!-- Basic Controls -->
+        <div class="col-12 col-sm-5 col-lg-4">
+            <div class="pb-1">
+                <button class="btn btn-sm btn-primary" onclick="toggleStart()" id="start-btn">Start | Pause</button>
+                <button class="btn btn-sm btn-primary" onclick="randomize()" id="randomize">Randomize</button>
+                <button class="btn btn-sm btn-primary" onclick="clearBoard()">Clear</button>
+            </div>
+            Display Controls:
+            <div class="pb-1">
+                <button class="btn btn-sm btn-secondary selected" onclick="toggleDark()" id="toggle-dark">Dark</button>
+                <button class="btn btn-sm btn-secondary" onclick="toggleColorMode()" id="toggle-color">Color</button>
+                <button class="btn btn-sm btn-secondary" onclick="toggleShowAge()" id="toggle-age">Show Age</button>
+            </div>
+            <div>
+                Grid Size:
+                <input type="range" min="10" max="100" value="25" class="slider" id="slider-grid-size">
+                <span id="grid-size">25</span> px
+            </div>
+            <div>
+                Frame Rate:
+                <input type="range" min="1" max="24" value="10" class="slider" id="slider-fr">
+                <span id="fr">15</span> fps
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-7 col-lg-8">
+            <!-- Buttons for 3 Major Modes -->
+            <div class="pb-1">
+                <button class="btn btn-sm btn-secondary tab-left" id="toggle-rules"
+                    onclick="toggleTabs('rules')">Game Rules</button>
+                <button class="btn btn-sm btn-secondary tab-middle selected" id="toggle-patterns"
+                    onclick="toggleTabs('patterns')">Patterns</button>
+                <button class="btn btn-sm btn-secondary tab-right" id="toggle-drawing"
+                    onclick="toggleTabs('drawingPad')">Drawing Pad</button>
+                <button class="btn btn-sm btn-secondary" id="toggle-battle" onclick="toggleBattleMode()">BATTLE
+                    MODE!!</button>
+            </div>
+            <!-- Game Rule Controls -->
+            <div class="hide" id="rules-div">
+                <div>
+                    SURVIVAL conditions: <input type="text" id="neightbors-min" value="2" style="width: 2em"
+                        oninput="resetRules()">
+                    to <input type="text" id="neightbors-max" value="3" style="width: 2em" oninput="resetRules()">
+                    neighbors
+                </div>
+                <div>
+                    REPRODUCTION conditions: <input type="text" id="reproduce-min" value="3" style="width: 2em">
+                    to <input type="text" id="reproduce-max" value="3" style="width: 2em">
+                    neighbors
+                </div>
+                <button onclick="toggleStopAtBoundary()" id="toggle-boundary" class="btn-tertiary">Stop at Boundary</button>
+            </div>
+
+            <!-- Battle Mode -->
+            <div id="patterns-div">
+                <div id="btn-pattern-container"></div>
+                <div>(Press space to rotate)</div>
+            </div>
+
+            <!-- Drawing Pad -->
+            <div class="hide" id="drawing-div">
+                <div>
+                    <button onclick="printArr()" id="print-arr">Print Array</button>
+                    <input type="text" id="arr-display" value="" style="width: 60%"> <br>
+                    <button onclick="saveArr()" id="save-arr">Save Pattern</button>
+                    <input type="text" id="custom-pattern-name" value="CustomPattern1" style="width: 150px">
+                    (enter name to save custom pattern)
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <!-- Score Board (Fixed) -->
+    <div id="score-board" class="box mx-auto px-3 py-2 hide">
+        <div class="scores row m-0 justify-content-between align-items-end">
+            <div class="col-auto p-0 score" id="score-player1">0</div>
+            <div class="col-auto p-0" id="vs">VS</div>
+            <div class="col-auto p-0 score" id="score-player2">0</div>
+        </div>
+
+        <div class="bar-container my-1">
+            <div class="bar" id="bar-player2">
+                <div class="bar" id="bar-player1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <a href="index.html">
+        <div class="box" id="home-button">
+            <i class="fas fa-home"></i>
+        </div>
+    </a>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="src/game/BaseGame.js"></script>
+    <script src="src/game/BattleModeGame.js"></script>
+    <script src="src/game/ColorModeGame.js"></script>
+
+    <script src="src/patterns.js"></script>
+    <script src="src/settings-display.js"></script>
+    <script src="src/settings-game.js"></script>
+    <script src="src/index.js"></script>
+
+    <script>
+        setTimeout(() => {
+            toggleStart();
+        }, 500);
+    </script>
+</body>
+
+</html>

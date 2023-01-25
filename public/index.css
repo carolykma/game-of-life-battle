@@ -1,0 +1,21 @@
+#menu {
+    position: fixed;
+    top: 20%;
+    left: 50px;
+    width: 95%;
+    max-width: calc(100vw - 100px);
+}
+
+.title {
+    font-size: 22px;
+    text-shadow: 0 0 7px cyan;
+    text-decoration-line: underline;
+    text-decoration-style: double;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    #menu {
+        position: absolute;
+    }
+}
