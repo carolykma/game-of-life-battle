@@ -122,6 +122,24 @@ class BattleModeGame extends BaseGame {
         return playerColors[currentBoard[x][y]];
     }
 
+    paint() {
+        super.paint();
+        if (window.width <= 768) {
+            this.showOutOfRangeHighlight(); // always show when on mobile
+        }
+    }
+
+    // highlight opponent's territory in red
+    showOutOfRangeHighlight() {
+        noStroke();
+        fill(100, 0, 0, 100);
+        if (currentPlayer === 1) {
+            rect(ceil(columns / 2) * unitLength, 0, floor(columns / 2) * unitLength, rows * unitLength);
+        } else if (currentPlayer === 2) {
+            rect(0, 0, floor(columns / 2) * unitLength, rows * unitLength);
+        }
+    }
+
     fireOutOfRangeAlert() {
         this.disable();
         Swal.fire({
@@ -133,19 +151,10 @@ class BattleModeGame extends BaseGame {
     }
 
     onPatternHover(x, y, arr) {
-        // block preview in opponent's territory
-        noStroke();
-        fill(100, 0, 0, 100);
-        if (currentPlayer == 1) {
-            if ((x + arr.length) > ceil(columns / 2)) {
-                rect(ceil(columns / 2) * unitLength, 0, floor(columns / 2) * unitLength, rows * unitLength);
-                return;
-            }
-        } else if (currentPlayer == 2) {
-            if (x < floor(columns / 2)) {
-                rect(0, 0, floor(columns / 2) * unitLength, rows * unitLength);
-                return;
-            }
+        // block preview when in opponent's territory
+        if ((currentPlayer == 1 && (x + arr.length) > ceil(columns / 2)) || (currentPlayer == 2 && x < floor(columns / 2))) {
+            this.showOutOfRangeHighlight();
+            return;
         }
         super.onPatternHover(x, y, arr);
     }
