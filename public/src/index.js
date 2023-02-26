@@ -43,6 +43,7 @@ function onGridAction(x, y) {
 }
 
 function mousePressed() {
+    if (event.type === "touchstart") return; // to fix p5's bug on mobile (https://github.com/processing/p5.js/issues/1815)
     if (game.disableAction) return;
     let index = getGridIndex();
     if (!index) return; // outside of board
